@@ -1,0 +1,24 @@
+yapridu:
+  version: 0.1
+
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  datasource:
+# Swagger datasource properties:
+#    url: "jdbc:postgresql://localhost:5434/YaPridu_DB"
+#    username: "root"
+#    password: "root"
+
+# Local datasource properties:
+    url: "jdbc:postgresql://localhost:5432/YaPridu_DB"
+    username: "postgres"
+    password: "123321"
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: "update"
