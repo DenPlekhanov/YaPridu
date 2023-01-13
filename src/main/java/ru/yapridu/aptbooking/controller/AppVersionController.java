@@ -1,4 +1,4 @@
-package ru.yapridu.bookingsystemback.controller;
+package ru.yapridu.aptbooking.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,6 @@ public class AppVersionController {
 
     @GetMapping()
     public ResponseEntity<String> getVersion() {
-        return new ResponseEntity<>("Application version is: " + env.getProperty("yapridu.version"), HttpStatus.OK);
+        return new ResponseEntity<>(env.getProperty("aptbooking.version"), HttpStatus.OK);
     }
 }
