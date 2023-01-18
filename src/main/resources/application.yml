@@ -7,7 +7,6 @@ spring:
       filter:
         enabled: true
 
-
   datasource:
 # Swagger datasource properties:
 #    url: "jdbc:postgresql://localhost:5434/YaPridu_DB"
