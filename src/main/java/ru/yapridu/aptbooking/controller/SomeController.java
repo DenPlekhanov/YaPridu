@@ -14,6 +14,7 @@ public class SomeController {
     public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
         return Collections.singletonMap("name", principal.getName());
     }
+
     @RequestMapping("/secret")
     public String secret() {
         return "protected data";
