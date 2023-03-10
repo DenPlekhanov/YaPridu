@@ -23,11 +23,8 @@ public class AppVersionController {
     @Autowired
     private Environment env;
 
-    @PostMapping()
-
     @GetMapping()
     public ResponseEntity<String> getVersion() {
         return new ResponseEntity<>(env.getProperty("aptbooking.version"), HttpStatus.OK);
-//        return ResponseEntity.ok(env.getProperty("aptbooking.version"));
     }
 }
