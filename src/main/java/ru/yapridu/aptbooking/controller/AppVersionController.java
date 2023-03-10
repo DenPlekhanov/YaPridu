@@ -7,6 +7,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,11 @@ public class AppVersionController {
     @Autowired
     private Environment env;
 
+    @PostMapping()
+
     @GetMapping()
     public ResponseEntity<String> getVersion() {
         return new ResponseEntity<>(env.getProperty("aptbooking.version"), HttpStatus.OK);
+//        return ResponseEntity.ok(env.getProperty("aptbooking.version"));
     }
 }

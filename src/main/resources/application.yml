@@ -1,6 +1,10 @@
 aptbooking:
   version: 1.0
 
+server:
+  port: 8080
+
+
 spring:
   mvc:
     hiddenmethod:
@@ -13,11 +17,13 @@ spring:
         registration:
           google:
             client-id: 863222799154-f2hop90u5f4e8e3vkg2qettkn1v047kg.apps.googleusercontent.com
-            client-secret: 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
+#            client-secret: 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
+            client-secret: ${googleClientSecret} #ClientCecret should be specified in Environment Variables (Edit Configurations -> Environment Variables -> add googleClientSecret and his secret value)
           vk:
             #           Это приложение создано тут https://vk.com/apps?act=manage
             client-id: 51528571
-            client-secret: Huxc2GRiWpsfeMjaxeoU
+#            client-secret: Huxc2GRiWpsfeMjaxeoU
+            client-secret: ${vkClientSecret} #ClientCecret should be specified in Environment Variables (Edit Configurations -> Environment Variables -> add vkClientSecret and his secret value)
 
             #            Это приложение создано тут https://platform.vk.com/ Это пока не работает (возможно взлетит при работе с конкретного домена, т.к. сейчас ошибки переадресации.
             #            client-id: 51528572
@@ -52,3 +58,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: "update"
+
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui.html"

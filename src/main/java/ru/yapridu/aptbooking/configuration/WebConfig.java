@@ -1,4 +1,4 @@
-package ru.yapridu.aptbooking;
+package ru.yapridu.aptbooking.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/error", "/webjars/**").permitAll()
+                        .antMatchers("/", "/error", "/webjars/**","/swagger-ui/**","/api/v1/version").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e -> e
