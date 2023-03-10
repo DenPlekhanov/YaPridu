@@ -1,6 +1,8 @@
 package ru.yapridu.aptbooking.controller;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,14 +21,21 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/v1/company")
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/company")
+@Tag(name = "Company", description = "Company management")
+@ApiResponse(responseCode = "500", description = "Internal error")
+//@ApiResponse(responseCode = "400", description = "Validation failed")
+@ApiResponse(responseCode = "404", description = "No company was found")
 public class CompanyController {
     private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
+//    private static final int DEFAULT_PAGINATION_DATA_LIMIT = 10;
+//    private static final int DEFAULT_PAGE_NUM = 1;
     private final UserService userService;
     private final CompanyService service;
-    
-//    @ApiOperation(value = "Получить список всех компаний.", nickname = "getAll")
+
+    @Operation(description = "Find all companies")
+    @ApiResponse(responseCode = "200", description = "Companies was found")
     @GetMapping(name = "", produces = "application/json")
     public ResponseEntity<List<Company>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
@@ -56,6 +65,6 @@ public class CompanyController {
 
         Long idOfNewCompany = service.createNewCompany(newCompany).getId();
 
-        return new ResponseEntity<>(idOfNewCompany,HttpStatus.CREATED);
+        return new ResponseEntity<>(idOfNewCompany, HttpStatus.CREATED);
     }
 }
