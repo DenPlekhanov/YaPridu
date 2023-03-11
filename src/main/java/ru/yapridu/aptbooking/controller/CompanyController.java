@@ -29,7 +29,7 @@ import java.util.List;
 @ApiResponse(responseCode = "404", description = "No company was found")
 public class CompanyController {
     private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
-//    private static final int DEFAULT_PAGINATION_DATA_LIMIT = 10;
+    //    private static final int DEFAULT_PAGINATION_DATA_LIMIT = 10;
 //    private static final int DEFAULT_PAGE_NUM = 1;
     private final UserService userService;
     private final CompanyService service;
@@ -41,7 +41,9 @@ public class CompanyController {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping()
+    @Operation(description = "Create new company")
+    @ApiResponse(responseCode = "201", description = "Company was created")
+    @PostMapping(name = "", produces = "application/json")
     public ResponseEntity<Long> createCompany(@RequestParam Long userID,
                                               @RequestParam String name,
                                               @RequestParam String address,
@@ -64,7 +66,6 @@ public class CompanyController {
                 .build();
 
         Long idOfNewCompany = service.createNewCompany(newCompany).getId();
-
         return new ResponseEntity<>(idOfNewCompany, HttpStatus.CREATED);
     }
 }
