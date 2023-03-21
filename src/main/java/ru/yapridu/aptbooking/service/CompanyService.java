@@ -1,13 +1,14 @@
 package ru.yapridu.aptbooking.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yapridu.aptbooking.model.Company;
 import ru.yapridu.aptbooking.repository.CompanyRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -17,6 +18,10 @@ public class CompanyService {
 
     public List<Company> getAll() {
         return repository.findAll();
+    }
+
+    public Optional<Company> findById (UUID id) {
+        return repository.findById(id);
     }
 
     public Company createNewCompany(Company newCompany) {

@@ -15,6 +15,8 @@ import ru.yapridu.aptbooking.service.security.UserService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author Den
@@ -36,15 +38,21 @@ public class CompanyController {
 
     @Operation(description = "Find all companies")
     @ApiResponse(responseCode = "200", description = "Companies was found")
-    @GetMapping(name = "", produces = "application/json")
+    @GetMapping(value = "", name = "Get all companies list", produces = "application/json")
     public ResponseEntity<List<Company>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    }
+
+    @ApiResponse(responseCode = "200", description = "Companie was found")
+    @GetMapping(value = "/{id}", name = "Find by id (optional)", produces = "application/json")
+    public ResponseEntity<Optional<Company>> findById(@PathVariable("id") UUID id) {
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @Operation(description = "Create new company")
     @ApiResponse(responseCode = "201", description = "Company was created")
     @PostMapping(name = "", produces = "application/json")
-    public ResponseEntity<Long> createCompany(@RequestParam Long userID,
+    public ResponseEntity<UUID> createCompany(@RequestParam Long userID,
                                               @RequestParam String name,
                                               @RequestParam String address,
                                               @RequestParam String contact,
@@ -65,7 +73,7 @@ public class CompanyController {
                 .version(version)
                 .build();
 
-        Long idOfNewCompany = service.createNewCompany(newCompany).getId();
+        UUID idOfNewCompany = service.createNewCompany(newCompany).getId();
         return new ResponseEntity<>(idOfNewCompany, HttpStatus.CREATED);
     }
 }
