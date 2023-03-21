@@ -1,4 +1,4 @@
-package ru.yapridu.aptbooking.model.security;
+package ru.yapridu.aptbooking.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

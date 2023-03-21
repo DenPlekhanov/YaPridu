@@ -1,8 +1,7 @@
-package ru.yapridu.aptbooking.model;
+package ru.yapridu.aptbooking.model.entity;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import ru.yapridu.aptbooking.model.security.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

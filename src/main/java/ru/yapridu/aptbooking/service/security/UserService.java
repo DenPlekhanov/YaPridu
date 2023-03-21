@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.yapridu.aptbooking.model.security.Role;
-import ru.yapridu.aptbooking.model.security.User;
+import ru.yapridu.aptbooking.model.entity.Role;
+import ru.yapridu.aptbooking.model.entity.User;
 import ru.yapridu.aptbooking.repository.security.RoleRepository;
 import ru.yapridu.aptbooking.repository.security.UserRepository;
 

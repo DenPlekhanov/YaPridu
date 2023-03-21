@@ -9,7 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.yapridu.aptbooking.model.Company;
+import ru.yapridu.aptbooking.model.entity.Company;
+import ru.yapridu.aptbooking.model.exception.CompanyNotFoundException;
 import ru.yapridu.aptbooking.service.CompanyService;
 import ru.yapridu.aptbooking.service.security.UserService;
 
@@ -38,29 +39,36 @@ public class CompanyController {
 
     @Operation(description = "Find all companies")
     @ApiResponse(responseCode = "200", description = "Companies was found")
-    @GetMapping(value = "", name = "Get all companies list", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     public ResponseEntity<List<Company>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @ApiResponse(responseCode = "200", description = "Companie was found")
-    @GetMapping(value = "/{id}", name = "Find by id (optional)", produces = "application/json")
-    public ResponseEntity<Optional<Company>> findById(@PathVariable("id") UUID id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
+    @Operation(description = "Find company by UUID")
+    @ApiResponse(responseCode = "200", description = "Company was found")
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Company> findById(@PathVariable("id") UUID id) {
+        Optional<Company> company = service.findById(id);
+        if (company.isEmpty()) {
+            throw new CompanyNotFoundException(id);
+        }
+        return new ResponseEntity<>(company.get(), HttpStatus.OK);
     }
+    //TODO Не нравится разворачивание Optional`a. Скорее всего нужен рефакторинг.
+
 
     @Operation(description = "Create new company")
     @ApiResponse(responseCode = "201", description = "Company was created")
-    @PostMapping(name = "", produces = "application/json")
-    public ResponseEntity<UUID> createCompany(@RequestParam Long userID,
-                                              @RequestParam String name,
-                                              @RequestParam String address,
-                                              @RequestParam String contact,
-                                              @RequestParam String officialCompanyDetails,
-                                              @RequestParam String description,
-                                              @RequestParam Date createdDate,
-                                              @RequestParam Date modifiedDate,
-                                              @RequestParam Integer version) {
+    @PostMapping(value = "", produces = "application/json")
+    public ResponseEntity<UUID> create(@RequestParam Long userID,
+                                       @RequestParam String name,
+                                       @RequestParam String address,
+                                       @RequestParam String contact,
+                                       @RequestParam String officialCompanyDetails,
+                                       @RequestParam String description,
+                                       @RequestParam Date createdDate,
+                                       @RequestParam Date modifiedDate,
+                                       @RequestParam Integer version) {
         Company newCompany = Company.builder()
                 .owningUser(userService.findUserById(userID)) //TODO Не уверен, что так правильно. Уточнить.
                 .name(name)
