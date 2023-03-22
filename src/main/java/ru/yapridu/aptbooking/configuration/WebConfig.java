@@ -31,7 +31,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/error", "/webjars/**","/swagger-ui/**","/api/v1/version").permitAll()
+                        .antMatchers("/", "/error", "/webjars/**","/swagger-ui/**","/api/v1/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e -> e

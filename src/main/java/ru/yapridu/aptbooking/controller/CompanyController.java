@@ -8,12 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.yapridu.aptbooking.model.entity.Company;
 import ru.yapridu.aptbooking.model.exception.CompanyNotFoundException;
 import ru.yapridu.aptbooking.service.CompanyService;
 import ru.yapridu.aptbooking.service.security.UserService;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -42,15 +44,17 @@ public class CompanyController {
     @Operation(description = "Create new company")
     @ApiResponse(responseCode = "201", description = "Company was created")
     @PostMapping(value = "", produces = "application/json")
+//    @PreAuthorize("hasAnyRole()")
     public ResponseEntity<UUID> create(@RequestParam Long userId,
                                        @RequestParam String name,
                                        @RequestParam String address,
                                        @RequestParam String contact,
                                        @RequestParam String officialCompanyDetails,
                                        @RequestParam String description,
-                                       @RequestParam Date createdDate,
-                                       @RequestParam Date modifiedDate,
+//                                       @RequestParam Date createdDate,
+//                                       @RequestParam Date modifiedDate,
                                        @RequestParam Integer version) {
+        Date creatingTime = Date.from(Instant.now());
         Company newCompany = Company.builder()
                 .owningUser(userService.findUserById(userId)) //TODO Не уверен, что так правильно. Уточнить.
                 .name(name)
@@ -58,8 +62,9 @@ public class CompanyController {
                 .contact(contact)
                 .officialCompanyDetails(officialCompanyDetails)
                 .description(description)
-                .createdDate(createdDate)
-                .modifiedDate(modifiedDate)
+//                .createdDate(createdDate)
+                .createdDate(creatingTime)
+                .modifiedDate(creatingTime)
                 .version(version)
                 .build();
         UUID idOfNewCompany = service.createNewCompany(newCompany).getId();
