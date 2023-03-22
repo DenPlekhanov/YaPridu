@@ -89,7 +89,7 @@ public class CompanyController {
 
     @Operation(description = "Update company fields")
     @ApiResponse(responseCode = "200", description = "Company was updated")
-    @PostMapping(value = "", produces = "application/json")
+    @PutMapping(value = "", produces = "application/json")
     public ResponseEntity.HeadersBuilder<?> update(@RequestParam UUID id,
                                                    @RequestParam String name,
                                                    @RequestParam String address,
