@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -37,8 +38,8 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User findUserById(Long userId) {
-        Optional<User> userFromDb = userRepository.findById(userId);
+    public User findUserById(Long id) {
+        Optional<User> userFromDb = userRepository.findById(id);
         return userFromDb.orElse(new User());
     }
 

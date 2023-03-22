@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CompanyService {
     private final CompanyRepository repository;
 
-    public List<Company> getAll() {
+    public List<Company> findAll() {
         return repository.findAll();
     }
 
@@ -27,4 +27,15 @@ public class CompanyService {
     public Company createNewCompany(Company newCompany) {
         return repository.save(newCompany);
     }
+
+    public void update(Company company) {
+        repository.save(company);
+        repository.flush();
+    }
+
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
+    }
+
+
 }
