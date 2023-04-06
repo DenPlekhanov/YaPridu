@@ -4,10 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -24,31 +22,31 @@ public class Company implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
-    @NotEmpty
+//    @NotEmpty //TODO Разобраяться с валидацией.
     private User owningUser;
 
     @Size(min = 2, message = "Имя не может быть короче 2 знаков.")
     private String name;
 
-    @NotEmpty
+//    @NotEmpty
     private String address;
 
-    @NotEmpty
+//    @NotEmpty
     private String contact;
 
-    @NotEmpty
+//    @NotEmpty
     private String officialCompanyDetails;
 
-    @NotEmpty
+//    @NotEmpty
     private String description;
 
-    @NotEmpty
-    private Date createdDate;
+//    @NotEmpty
+//    private Date createdDate;
+//
+//    private Date modifiedDate;
 
-    private Date modifiedDate;
-
-    @NotEmpty
+//    @NotEmpty
     private Integer version;
 }
