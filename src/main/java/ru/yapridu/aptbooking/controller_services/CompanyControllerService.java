@@ -2,9 +2,12 @@ package ru.yapridu.aptbooking.controller_services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.yapridu.aptbooking.business_logic.entities.Company;
 import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
 import ru.yapridu.aptbooking.business_logic.models.VersionedModelDTO;
 import ru.yapridu.aptbooking.business_logic.services.entities.CompanyService;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -17,4 +20,8 @@ public class CompanyControllerService {
         return VersionedModelDTO.of(this.companyService.create(companyData));
     }
 
+    public List<Company> getAll() {
+
+        return this.companyService.getAll();
+    }
 }

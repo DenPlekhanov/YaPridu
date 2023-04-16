@@ -6,6 +6,8 @@ import ru.yapridu.aptbooking.business_logic.entities.Company;
 import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
 import ru.yapridu.aptbooking.repositories_ebean.CompanyEbeanRepository;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CompanyService {
@@ -24,6 +26,11 @@ public class CompanyService {
             .build();
 
         return repository.insert(company);
+    }
+
+    public List<Company> getAll() {
+
+        return repository.findAll();
     }
 
 }

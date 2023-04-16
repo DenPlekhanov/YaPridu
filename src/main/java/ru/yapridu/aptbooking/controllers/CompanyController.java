@@ -5,13 +5,17 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.yapridu.aptbooking.business_logic.entities.Company;
 import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
 import ru.yapridu.aptbooking.business_logic.models.VersionedModelDTO;
 import ru.yapridu.aptbooking.controller_services.CompanyControllerService;
+
+import java.util.List;
 
 @RestController()
 @AllArgsConstructor
@@ -40,5 +44,10 @@ public class CompanyController {
         return this.companyControllerService.create(body);
     }
 
+    @GetMapping()
+    public List<Company> getAll() {
+
+        return this.companyControllerService.getAll();
+    }
 
 }
