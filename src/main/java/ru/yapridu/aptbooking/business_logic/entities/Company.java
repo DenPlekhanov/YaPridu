@@ -9,6 +9,8 @@ import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
@@ -31,5 +33,8 @@ public class Company extends BaseEntity {
     private String officialDetails;
 
     private String description;
+
+    @OneToMany()
+    private List<Service> services;
 
 }
