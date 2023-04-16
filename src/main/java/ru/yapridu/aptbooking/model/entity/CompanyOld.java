@@ -15,19 +15,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "company")
-public class Company implements Serializable {
+public class CompanyOld implements Serializable {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
+    //@ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn
 //    @NotEmpty //TODO Разобраяться с валидацией.
-    private User owningUser;
+    //private UserOld owningUser;
 
-    @Size(min = 2, message = "Имя не может быть короче 2 знаков.")
+    //@Size(min = 2, message = "Имя не может быть короче 2 знаков.")
     private String name;
 
 //    @NotEmpty

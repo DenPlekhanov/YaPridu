@@ -3,7 +3,7 @@ package ru.yapridu.aptbooking.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.yapridu.aptbooking.model.entity.User;
+import ru.yapridu.aptbooking.model.entity.UserOld;
 import ru.yapridu.aptbooking.model.exception.UserNotFoundException;
 import ru.yapridu.aptbooking.repository.UserRepository;
 
@@ -18,22 +18,22 @@ public class UserService {
     @Autowired
     private final UserRepository repository;
 
-    public User createNew(User user) {
+    public UserOld createNew(UserOld user) {
         return repository.save(user);
     }
 
-    public List<User> findAllUsers() {
+    public List<UserOld> findAllUsers() {
         return repository.findAll();
     }
 
-    public User findById(Long userId) {
-        Optional<User> userFromDb = repository.findById(userId);
+    public UserOld findById(Long userId) {
+        Optional<UserOld> userFromDb = repository.findById(userId);
         if (userFromDb.isPresent()) {
             return userFromDb.get();
         } else throw new UserNotFoundException("User with id "+ userId +" was not found.");
     }
 
-    public User update(User user) {
+    public UserOld update(UserOld user) {
         return repository.save(user);
     }
 

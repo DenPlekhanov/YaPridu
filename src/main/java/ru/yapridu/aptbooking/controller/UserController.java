@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.yapridu.aptbooking.model.entity.User;
+import ru.yapridu.aptbooking.model.entity.UserOld;
 import ru.yapridu.aptbooking.service.UserService;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping(value = "", produces = "application/json")
     public ResponseEntity<Long> create(@RequestParam String username,
                                        @RequestParam Integer version) {
-        User newUser = User.builder()
+        UserOld newUser = UserOld.builder()
                 .username(username)
 //                .createdDate(Date.from(Instant.now())) //TODO Разобраться с датами
                 .version(version)
@@ -48,29 +48,29 @@ public class UserController {
     @Operation(description = "Find all users")
     @ApiResponse(responseCode = "200", description = "Users was found")
     @GetMapping(value = "", produces = "application/json")
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserOld>> findAll() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
 
     @Operation(description = "Find User by Id")
     @ApiResponse(responseCode = "200", description = "User was found")
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<User> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<UserOld> findById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
 
     @Operation(description = "Update user fields")
     @ApiResponse(responseCode = "200", description = "User was updated")
     @PutMapping(value = "", produces = "application/json")
-    public ResponseEntity<User> update(@RequestParam Long id,
-                                       @RequestParam String username
+    public ResponseEntity<UserOld> update(@RequestParam Long id,
+                                          @RequestParam String username
 //                                     @RequestParam Date modifiedDate
     ) {
-        User user = userService.findById(id);
+        UserOld user = userService.findById(id);
         user.setUsername(username);
 //        user.setModifiedDate(modifiedDate);
         user.setVersion(user.getVersion() + 1);
-        User updatedUser = userService.update(user);
+        UserOld updatedUser = userService.update(user);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 

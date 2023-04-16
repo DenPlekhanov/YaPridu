@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.yapridu.aptbooking.model.entity.Company;
-import ru.yapridu.aptbooking.service.CompanyService;
+import ru.yapridu.aptbooking.model.entity.CompanyOld;
+import ru.yapridu.aptbooking.service.CompanyServiceOld;
 import ru.yapridu.aptbooking.service.UserService;
 
 import java.time.Instant;
@@ -29,12 +29,12 @@ import java.util.UUID;
 @ApiResponse(responseCode = "500", description = "Internal error")
 //  @ApiResponse(responseCode = "400", description = "Validation failed")
 @ApiResponse(responseCode = "404", description = "No company was found")
-public class CompanyController {
-    private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
+public class CompanyControllerOld {
+    private static final Logger logger = LoggerFactory.getLogger(CompanyControllerOld.class);
 //    private static final int DEFAULT_PAGINATION_DATA_LIMIT = 10;
 //    private static final int DEFAULT_PAGE_NUM = 1;
     private final UserService userService;
-    private final CompanyService service;
+    private final CompanyServiceOld service;
 
     @Operation(description = "Create new company")
     @ApiResponse(responseCode = "201", description = "Company was created")
@@ -47,8 +47,8 @@ public class CompanyController {
                                        @RequestParam String description,
                                        @RequestParam Integer version) {
         Date creatingTime = Date.from(Instant.now()); //TODO Разобраться с датами
-        Company newCompany = Company.builder()
-                .owningUser(userService.findById(userId))
+        CompanyOld newCompany = CompanyOld.builder()
+                //.owningUser(userService.findById(userId))
                 .name(name)
                 .address(address)
                 .contact(contact)
@@ -65,27 +65,27 @@ public class CompanyController {
     @Operation(description = "Find all companies")
     @ApiResponse(responseCode = "200", description = "Companies was found")
     @GetMapping(value = "", produces = "application/json")
-    public ResponseEntity<List<Company>> findAll() {
+    public ResponseEntity<List<CompanyOld>> findAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @Operation(description = "Find company by UUID")
     @ApiResponse(responseCode = "200", description = "Company was found")
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Company> findById(@PathVariable("id") UUID id) {
+    public ResponseEntity<CompanyOld> findById(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @Operation(description = "Update company fields")
     @ApiResponse(responseCode = "200", description = "Company was updated")
     @PutMapping(value = "", produces = "application/json")
-    public ResponseEntity<Company> update(@RequestParam UUID id,
-                                                   @RequestParam String name,
-                                                   @RequestParam String address,
-                                                   @RequestParam String contact,
-                                                   @RequestParam String officialCompanyDetails,
-                                                   @RequestParam String description) {
-        Company company = service.findById(id);
+    public ResponseEntity<CompanyOld> update(@RequestParam UUID id,
+                                             @RequestParam String name,
+                                             @RequestParam String address,
+                                             @RequestParam String contact,
+                                             @RequestParam String officialCompanyDetails,
+                                             @RequestParam String description) {
+        CompanyOld company = service.findById(id);
         company.setName(name);
         company.setAddress(address);
         company.setContact(contact);
@@ -93,7 +93,7 @@ public class CompanyController {
         company.setDescription(description);
 //        company.setModifiedDate(modifiedDate);
         company.setVersion(company.getVersion() + 1);
-        Company updatedCompany = service.update(company);
+        CompanyOld updatedCompany = service.update(company);
         return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
     }
 

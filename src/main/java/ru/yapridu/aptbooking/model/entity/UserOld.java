@@ -12,8 +12,8 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_user")
-public class User {
-    public User(String username) {
+public class UserOld {
+    public UserOld(String username) {
         this.username = username;
     }
 
