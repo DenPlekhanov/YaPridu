@@ -12,6 +12,25 @@ spring:
   flyway:
     locations: 'classpath:migrations'
 
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/appointment"
+    driver-class-name: org.postgresql.Driver
+    username: "postgres"
+    password: "123321"
+#    username: "mike"
+#    password: "1"
+
+ebean:
+  migration:
+    run: true       # run database migrations on startup
+  ddl:
+    generate: true
+    run: true
+
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui.html"
+
 #  security:
 #    oauth2:
 #      client:
@@ -43,20 +62,6 @@ spring:
 #            user-name-attribute: first_name
 #          google:
 #            user-name-attribute: name
-
-  datasource:
-    url:
-    username:
-    password:
-
-  #jpa:
-    #show-sql: true
-    #hibernate:
-      #ddl-auto: "update"
-
-springdoc:
-  swagger-ui:
-    path: "/swagger-ui.html"
 
 #logging:
 #  level:
