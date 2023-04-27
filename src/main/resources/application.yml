@@ -20,12 +20,17 @@ spring:
 #    username: "mike"
 #    password: "1"
 
-ebean:
-  migration:
-    run: true       # run database migrations on startup
-  ddl:
-    generate: true
-    run: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: "validate" # create / update
+
+#ebean:
+#  migration:
+#    run: true       # run database migrations on startup
+#  ddl:
+#    generate: true
+#    run: true
 
 springdoc:
   swagger-ui:

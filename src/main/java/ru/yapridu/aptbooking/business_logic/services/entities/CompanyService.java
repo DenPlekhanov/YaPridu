@@ -1,10 +1,11 @@
 package ru.yapridu.aptbooking.business_logic.services.entities;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yapridu.aptbooking.business_logic.entities.Company;
 import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
-import ru.yapridu.aptbooking.repositories_ebean.CompanyEbeanRepository;
+import ru.yapridu.aptbooking.repository.CompanyRepository;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CompanyService {
 
-    private final CompanyEbeanRepository repository;
+    private final CompanyRepository repository;
 
     public Company create(CreateCompanyDTO companyData) {
 
@@ -25,7 +26,7 @@ public class CompanyService {
             .description(companyData.getDescription())
             .build();
 
-        return repository.insert(company);
+        return repository.save(company);
     }
 
     public List<Company> getAll() {

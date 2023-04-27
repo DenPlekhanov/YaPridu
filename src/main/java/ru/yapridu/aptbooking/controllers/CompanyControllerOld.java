@@ -1,4 +1,4 @@
-package ru.yapridu.aptbooking.controller;
+package ru.yapridu.aptbooking.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.yapridu.aptbooking.model.entity.CompanyOld;
+import ru.yapridu.aptbooking.business_logic.entities.CompanyOld;
 import ru.yapridu.aptbooking.service.CompanyServiceOld;
 import ru.yapridu.aptbooking.service.UserService;
 
@@ -25,7 +25,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/company")
-@Tag(name = "Company", description = "Company management")
+@Tag(name = "Company (old controller)", description = "Controller for company management.")
 @ApiResponse(responseCode = "500", description = "Internal error")
 //  @ApiResponse(responseCode = "400", description = "Validation failed")
 @ApiResponse(responseCode = "404", description = "No company was found")

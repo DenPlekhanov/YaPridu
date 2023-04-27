@@ -3,8 +3,8 @@ package ru.yapridu.aptbooking.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.yapridu.aptbooking.model.entity.UserOld;
-import ru.yapridu.aptbooking.model.exception.UserNotFoundException;
+import ru.yapridu.aptbooking.business_logic.entities.UserOld;
+import ru.yapridu.aptbooking.business_logic.entities.exception.UserNotFoundException;
 import ru.yapridu.aptbooking.repository.UserRepository;
 
 import java.util.List;

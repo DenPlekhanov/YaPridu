@@ -1,4 +1,4 @@
-package ru.yapridu.aptbooking.controller;
+package ru.yapridu.aptbooking.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.yapridu.aptbooking.model.entity.UserOld;
+import ru.yapridu.aptbooking.business_logic.entities.UserOld;
 import ru.yapridu.aptbooking.service.UserService;
 
 import java.util.List;

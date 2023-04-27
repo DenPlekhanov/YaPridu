@@ -1,11 +1,11 @@
-package ru.yapridu.aptbooking.model.exception;
+package ru.yapridu.aptbooking.business_logic.entities.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class CompanyNotFoundException extends RuntimeException {
-    public CompanyNotFoundException(String message) {
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(String message) {
         super(message);
     }
 }

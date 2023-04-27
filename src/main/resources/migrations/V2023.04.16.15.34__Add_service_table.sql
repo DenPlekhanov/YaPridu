@@ -13,4 +13,5 @@ CREATE TABLE service (
 
     CONSTRAINT fk_service__company_id___company__id
         FOREIGN KEY (company_id) REFERENCES company (id)
+
 );

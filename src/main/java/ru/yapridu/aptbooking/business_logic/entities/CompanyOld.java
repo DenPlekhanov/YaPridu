@@ -1,4 +1,4 @@
-package ru.yapridu.aptbooking.model.entity;
+package ru.yapridu.aptbooking.business_logic.entities;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

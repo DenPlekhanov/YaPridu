@@ -3,8 +3,8 @@ package ru.yapridu.aptbooking.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.yapridu.aptbooking.model.entity.CompanyOld;
-import ru.yapridu.aptbooking.model.exception.CompanyNotFoundException;
+import ru.yapridu.aptbooking.business_logic.entities.CompanyOld;
+import ru.yapridu.aptbooking.business_logic.entities.exception.CompanyNotFoundException;
 import ru.yapridu.aptbooking.repository.CompanyRepository;
 
 import javax.transaction.Transactional;
