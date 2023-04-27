@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yapridu.aptbooking.business_logic.entities.UserOld;
-import ru.yapridu.aptbooking.service.UserService;
+import ru.yapridu.aptbooking.business_logic.services.UserService;
 
 import java.util.List;
 

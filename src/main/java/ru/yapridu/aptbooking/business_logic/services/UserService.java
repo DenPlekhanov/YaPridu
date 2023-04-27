@@ -1,4 +1,4 @@
-package ru.yapridu.aptbooking.service;
+package ru.yapridu.aptbooking.business_logic.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
