@@ -2,6 +2,8 @@ package ru.yapridu.aptbooking.controllers;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -26,20 +28,27 @@ public class CompanyController {
     private final CompanyControllerService companyControllerService;
 
     @PostMapping(value = "", produces = "application/json")
-    @Operation(description = "Create company")
-//    @ApiOperation(value = "Create company")
-//    @ApiImplicitParam(
-//            paramType = "body",
-//            required = true,
-//            name = "Данные для создания кандидата",
-//            dataTypeClass = CreateCompanyDTO.class
-//    )
+    @Operation(description = "Create company") //@ApiOperation(value = "Create company")
+    @ApiImplicitParam(
+            paramType = "body",
+            required = true,
+            name = "Данные для создания кандидата",
+            dataTypeClass = CreateCompanyDTO.class
+    )
 //    @ApiResponse(
 //            code = 200,
 //            message = "Данные созданного кандидата",
 //            response = VersionedModelDTO.class
 //    )
-    @ApiResponse(responseCode = "201", description = "Company was created")
+    @ApiResponse(responseCode = "201", description = "The company has been successfully created.",
+            content =  { @Content(mediaType = "application/json",
+            schema = @Schema(implementation = VersionedModelDTO.class)) })
+    @ApiResponse(responseCode = "400", description = "Bad Request.",
+            content =  { @Content(mediaType = "application/json",
+            schema = @Schema(implementation = String.class /*, defaultValue = "Bad Request!!!"*/)) })
+    @ApiResponse(responseCode = "401", description = "Unauthorized request.")
+    @ApiResponse(responseCode = "500", description = "Internal Server Error.")
+    //@ApiImplicitParam - отсутствует в Swagger 3.0
     public ResponseEntity<VersionedModelDTO> create(@RequestBody CreateCompanyDTO body) {
 //    public VersionedModelDTO create(@RequestBody CreateCompanyDTO body) {
         //this.createCompanyValidator.validate(body);

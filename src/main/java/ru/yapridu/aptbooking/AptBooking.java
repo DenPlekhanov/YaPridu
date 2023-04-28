@@ -1,14 +1,10 @@
 package ru.yapridu.aptbooking;
 
-import io.ebean.Database;
-import io.ebean.DatabaseFactory;
-import io.ebean.config.DatabaseConfig;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.Properties;
+//import java.util.Properties;
 
 @SpringBootApplication
 @OpenAPIDefinition (info = @Info(title = "YaPridu API", version = "1"))

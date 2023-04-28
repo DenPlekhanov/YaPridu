@@ -25,13 +25,6 @@ spring:
     hibernate:
       ddl-auto: "validate" # create / update
 
-#ebean:
-#  migration:
-#    run: true       # run database migrations on startup
-#  ddl:
-#    generate: true
-#    run: true
-
 springdoc:
   swagger-ui:
     path: "/swagger-ui.html"

@@ -7,6 +7,7 @@ import ru.yapridu.aptbooking.business_logic.entities.exception.CompanyNotFoundEx
 import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
 import ru.yapridu.aptbooking.repository.CompanyRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,6 +19,8 @@ public class CompanyService {
     private final CompanyRepository repository;
 
     public Company create(CreateCompanyDTO companyData) {
+        Date creationDate = new Date();
+        System.out.println(creationDate);
         Company company = Company.builder()
             .ownerId(companyData.getOwnerId())
             .name(companyData.getName())
@@ -25,6 +28,8 @@ public class CompanyService {
             .contact(companyData.getContact())
             .officialDetails(companyData.getOfficialCompanyDetails())
             .description(companyData.getDescription())
+            .createdDate(creationDate)
+            .modifiedDate(creationDate) //TODO В БД пишется разное на несколько ms вресмя для createdDate и modifiedDate. Разобраться
             .build();
         return repository.save(company);
     }

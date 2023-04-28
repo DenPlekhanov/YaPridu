@@ -21,8 +21,6 @@
 
     <properties>
         <java.version>11</java.version>
-        <io.ebean.version>13.17.0</io.ebean.version>
-        <io.ebean.ebean-maven-plugin.version>13.17.0</io.ebean.ebean-maven-plugin.version>
         <org.flywaydb.flyway-core.version>8.0.5</org.flywaydb.flyway-core.version>
     </properties>
 
@@ -92,11 +90,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.ebean</groupId>
-            <artifactId>ebean</artifactId>
-            <version>${io.ebean.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>${org.flywaydb.flyway-core.version}</version>
@@ -112,26 +105,8 @@
                 <version>8.5.13</version>
             </plugin>
             <plugin>
-                <groupId>io.ebean</groupId>
-                <artifactId>ebean-maven-plugin</artifactId>
-                <version>${io.ebean.ebean-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>main</id>
-                        <phase>process-classes</phase>
-                        <configuration>
-                            <transformArgs>debug=1</transformArgs>
-                        </configuration>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-
                 <configuration>
                     <excludes>
                         <exclude>
