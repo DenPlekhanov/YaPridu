@@ -13,12 +13,10 @@ spring:
     locations: 'classpath:migrations'
 
   datasource:
-    url: "jdbc:postgresql://localhost:5432/appointment"
+    url:
     driver-class-name: org.postgresql.Driver
-    username: "postgres"
-    password: "123321"
-#    username: "mike"
-#    password: "1"
+    username:
+    password:
 
   jpa:
     show-sql: true
