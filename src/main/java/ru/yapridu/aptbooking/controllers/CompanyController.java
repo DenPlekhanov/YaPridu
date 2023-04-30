@@ -34,10 +34,10 @@ public class CompanyController {
     @PostMapping(value = "", produces = "application/json")
     @Operation(description = "Create company")
     @ApiImplicitParam(
-            paramType = "body",
-            required = true,
-            name = "Данные для создания кандидата",
-            dataTypeClass = CreateCompanyDTO.class
+        paramType = "body",
+        required = true,
+        name = "Данные для создания кандидата",
+        dataTypeClass = CreateCompanyDTO.class
     )
     @ApiResponse(responseCode = "201", description = "The company has been successfully created.")
     public ResponseEntity<VersionedModelDTO> create(@RequestBody CreateCompanyDTO body) {
