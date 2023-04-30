@@ -1,10 +1,15 @@
 package ru.yapridu.aptbooking.business_logic.entities;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +34,6 @@ public class Company extends BaseEntity {
 
     private String description;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "company")
     private List<Service> services;
 }
