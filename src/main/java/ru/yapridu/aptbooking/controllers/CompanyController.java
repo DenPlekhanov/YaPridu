@@ -2,15 +2,19 @@ package ru.yapridu.aptbooking.controllers;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.yapridu.aptbooking.business_logic.entities.Company;
 import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
 import ru.yapridu.aptbooking.business_logic.models.VersionedModelDTO;
@@ -28,31 +32,17 @@ public class CompanyController {
     private final CompanyControllerService companyControllerService;
 
     @PostMapping(value = "", produces = "application/json")
-    @Operation(description = "Create company") //@ApiOperation(value = "Create company")
+    @Operation(description = "Create company")
     @ApiImplicitParam(
             paramType = "body",
             required = true,
             name = "Данные для создания кандидата",
             dataTypeClass = CreateCompanyDTO.class
     )
-//    @ApiResponse(
-//            code = 200,
-//            message = "Данные созданного кандидата",
-//            response = VersionedModelDTO.class
-//    )
-    @ApiResponse(responseCode = "201", description = "The company has been successfully created.",
-            content =  { @Content(mediaType = "application/json",
-            schema = @Schema(implementation = VersionedModelDTO.class)) })
-    @ApiResponse(responseCode = "400", description = "Bad Request.",
-            content =  { @Content(mediaType = "application/json",
-            schema = @Schema(implementation = String.class /*, defaultValue = "Bad Request!!!"*/)) })
-    @ApiResponse(responseCode = "401", description = "Unauthorized request.")
-    @ApiResponse(responseCode = "500", description = "Internal Server Error.")
-    //@ApiImplicitParam - отсутствует в Swagger 3.0
+    @ApiResponse(responseCode = "201", description = "The company has been successfully created.")
     public ResponseEntity<VersionedModelDTO> create(@RequestBody CreateCompanyDTO body) {
-//    public VersionedModelDTO create(@RequestBody CreateCompanyDTO body) {
-        //this.createCompanyValidator.validate(body);
-//        return this.companyControllerService.create(body);
+
+        //TODO this.createCompanyValidator.validate(body);
         return new ResponseEntity<>(this.companyControllerService.create(body), HttpStatus.CREATED);
     }
 
