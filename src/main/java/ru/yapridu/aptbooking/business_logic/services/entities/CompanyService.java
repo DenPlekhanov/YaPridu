@@ -40,14 +40,6 @@ public class CompanyService {
             () -> new ResourceNotFoundException("Company with id " + id + " not found"));
     }
 
-/*
-    public Company getById(UUID id) {
-        Optional<Company> companyFromDb = repository.findById(id);
-        if (companyFromDb.isPresent()) {
-            return companyFromDb.get();
-        } else throw new CompanyNotFoundException("Company with id "+ id +" was not found.");
-    }
-*/
     public void deleteById(UUID id) {
 
         repository.deleteById(id);
