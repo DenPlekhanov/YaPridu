@@ -13,19 +13,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ControllerAdvice
-//@Slf4j
 public class GlobalExceptionHandler {
     private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler
     public ResponseEntity<CommonErrorMessageContainer> catchResourceNotFoundException(ResourceNotFoundException e) {
 
-
         Map<String, String> moreErrorDetailsMap = new LinkedHashMap<>();
         moreErrorDetailsMap.put("Detail1", "MoreDetail1");
+        moreErrorDetailsMap.put("Detail2", "MoreDetail2");
         long timestamp = System.currentTimeMillis(); //Timestamp в миллисекундах временно в качестве идентификатора ошибки.
-        LOG.error("Error id: " + timestamp + ".", e.getMessage(), e, moreErrorDetailsMap);
-        LOG.trace("Трэйс");
+        LOG.error("| Error id: {} | Error message: {} | {}", timestamp, e.getMessage(), moreErrorDetailsMap);
 
         return new ResponseEntity<>(new CommonErrorMessageContainer(timestamp, HttpStatus.NOT_FOUND.value(), e.getMessage(), moreErrorDetailsMap)
                 , HttpStatus.NOT_FOUND);
