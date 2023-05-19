@@ -37,11 +37,13 @@ public class CompanyService {
     public Company getById(UUID id) {
 
         return repository.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException("Company with id " + id + " not found"));
+            () -> new ResourceNotFoundException("Company with id " + id + " not found."));
     }
 
     public void deleteById(UUID id) {
 
+        repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Company cannot be deleted because Company with id " + id + " not found."));
         repository.deleteById(id);
     }
 }

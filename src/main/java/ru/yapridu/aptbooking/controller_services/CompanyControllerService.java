@@ -35,4 +35,9 @@ public class CompanyControllerService {
 
         return VersionedModelDTO.of(companyService.create(companyData));
     }
+
+    public void deleteById (UUID id){
+
+        this.companyService.deleteById(id);
+    }
 }

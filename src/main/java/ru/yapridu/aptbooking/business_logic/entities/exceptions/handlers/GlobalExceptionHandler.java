@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.yapridu.aptbooking.business_logic.entities.exceptions.CommonErrorMessageContainer;
+import ru.yapridu.aptbooking.business_logic.entities.exceptions.ErrorMessageContainer;
 import ru.yapridu.aptbooking.business_logic.entities.exceptions.ResourceNotFoundException;
 
 import java.util.LinkedHashMap;
@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler
-    public ResponseEntity<CommonErrorMessageContainer> catchResourceNotFoundException(ResourceNotFoundException e) {
+    public ResponseEntity<ErrorMessageContainer> catchResourceNotFoundException(ResourceNotFoundException e) {
 
         Map<String, String> moreErrorDetailsMap = new LinkedHashMap<>();
         moreErrorDetailsMap.put("Detail1", "MoreDetail1");
@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
         long timestamp = System.currentTimeMillis(); //Timestamp в миллисекундах временно в качестве идентификатора ошибки.
         LOG.error("| Error id: {} | Error message: {} | {}", timestamp, e.getMessage(), moreErrorDetailsMap);
 
-        return new ResponseEntity<>(new CommonErrorMessageContainer(timestamp, HttpStatus.NOT_FOUND.value(), e.getMessage(), moreErrorDetailsMap)
+        return new ResponseEntity<>(new ErrorMessageContainer(timestamp, HttpStatus.NOT_FOUND.value(), e.getMessage(), moreErrorDetailsMap)
                 , HttpStatus.NOT_FOUND);
     }
 }

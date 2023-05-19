@@ -12,13 +12,13 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CommonErrorMessageContainer {
+public class ErrorMessageContainer {
     private long errorIdentifier;
     private int errorCode;
     private String message;
     private Map<String, String> moreErrorDetailsMap;
 
-    public CommonErrorMessageContainer(long errorIdentifier, int errorCode, String message) {
+    public ErrorMessageContainer(long errorIdentifier, int errorCode, String message) {
         this.errorIdentifier = errorIdentifier;
         this.errorCode = errorCode;
         this.message = message;
