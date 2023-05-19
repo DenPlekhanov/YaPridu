@@ -27,8 +27,8 @@ springdoc:
   swagger-ui:
     path: "/swagger-ui.html"
 
-logging:
-    level:
-        root: INFO
-        org.hibernate: DEBUG
-        ru.yapridu.aptbooking: INFO
+#logging:
+#    level:
+#        root: INFO
+#        org.hibernate: DEBUG
+#        ru.yapridu.aptbooking: INFO
