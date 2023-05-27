@@ -3,8 +3,8 @@ package ru.yapridu.aptbooking.business_logic.services.entities;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.yapridu.aptbooking.business_logic.entities.Company;
-import ru.yapridu.aptbooking.business_logic.entities.exceptions.ResourceNotFoundException;
 import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
+import ru.yapridu.aptbooking.exceptions.SystemException;
 import ru.yapridu.aptbooking.repository.CompanyRepository;
 
 import java.util.List;
@@ -37,13 +37,13 @@ public class CompanyService {
     public Company getById(UUID id) {
 
         return repository.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException("Company with id " + id + " not found."));
+            () -> new SystemException("Company with id " + id + " not found."));
     }
 
     public void deleteById(UUID id) {
 
         repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Company cannot be deleted because Company with id " + id + " not found."));
+                () -> new SystemException("Company cannot be deleted because Company with id " + id + " not found."));
         repository.deleteById(id);
     }
 }
