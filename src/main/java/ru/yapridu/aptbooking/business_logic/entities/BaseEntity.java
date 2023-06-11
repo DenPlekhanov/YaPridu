@@ -1,43 +1,37 @@
 package ru.yapridu.aptbooking.business_logic.entities;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @SuperBuilder(toBuilder = true)
 @MappedSuperclass
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class BaseEntity {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private final UUID id;
+    private UUID id;
 
     @CreationTimestamp
-    private final Date createdDate;
+    private Date createdDate;
 
     @UpdateTimestamp
-    private final Date modifiedDate;
+    private Date modifiedDate;
 
     @Version
-    private final Long version;
-
+    private Long version;
 }
