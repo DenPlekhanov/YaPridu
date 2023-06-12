@@ -1,6 +1,5 @@
 package ru.yapridu.aptbooking.controllers;
 
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -10,9 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.yapridu.aptbooking.business_logic.entities.Company;
-import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
+import ru.yapridu.aptbooking.business_logic.models.CreateOrUpdateCompanyDTO;
 import ru.yapridu.aptbooking.business_logic.models.VersionedModelDTO;
 import ru.yapridu.aptbooking.controller_services.CompanyControllerService;
+import ru.yapridu.aptbooking.validators.CreateOrUpdateCompanyDtoValidator;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,33 +22,31 @@ import java.util.UUID;
 @RequestMapping(path = "api/v1/companies", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Company controller", description = "Controller for company management.")
 public class CompanyController {
-    private static final Logger LOG = LoggerFactory.getLogger(CompanyController.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CompanyController.class);
     private final CompanyControllerService companyControllerService;
+    private final CreateOrUpdateCompanyDtoValidator createOrUpdateCompanyValidator;
 
-    @PostMapping(value = "")
-    @Operation(description = "Create company")
-    @ApiImplicitParam(
-            paramType = "body",
-            required = true,
-            name = "Данные для создания новой компании",
-            dataTypeClass = CreateCompanyDTO.class)
+    @PostMapping(value = "", produces = "application/json")
+    @Operation(description = "Create new company")
     @ResponseStatus(HttpStatus.CREATED)
-    public VersionedModelDTO create(@RequestBody CreateCompanyDTO body) {
+    public VersionedModelDTO create(@RequestBody CreateOrUpdateCompanyDTO body) {
 
-        //this.createCompanyValidator.validate(body);
+        this.createOrUpdateCompanyValidator.validate(body);
         return this.companyControllerService.create(body);
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "", produces = "application/json")
     @Operation(description = "Find all companies")
     @ResponseStatus(HttpStatus.OK)
     public List<Company> getAll() {
 
-        LOG.trace("Some trace");
-        LOG.debug("Some debug");
-        LOG.info("Some info");
-        LOG.warn("Some warn");
-        LOG.error("Some error");
+        //Logging level check
+        LOGGER.trace("Some trace");
+        LOGGER.debug("Some debug");
+        LOGGER.info("Some info");
+        LOGGER.warn("Some warn");
+        LOGGER.error("Some error");
 
         return this.companyControllerService.getAll();
     }
@@ -61,12 +59,12 @@ public class CompanyController {
         return this.companyControllerService.getById(id);
     }
 
-    @PutMapping(value = "")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @Operation(description = "Update company fields")
     @ResponseStatus(HttpStatus.OK)
-    public VersionedModelDTO update(@RequestBody CreateCompanyDTO body) {
+    public VersionedModelDTO update(@PathVariable("id") UUID id, @RequestBody CreateOrUpdateCompanyDTO body) {
 
-        return this.companyControllerService.update(body);
+        return this.companyControllerService.update(id, body);
     }
 
     @DeleteMapping(value = "/{id}", produces = "application/json")
