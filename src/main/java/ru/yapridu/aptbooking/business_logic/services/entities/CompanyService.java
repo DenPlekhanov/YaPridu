@@ -3,7 +3,7 @@ package ru.yapridu.aptbooking.business_logic.services.entities;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.yapridu.aptbooking.business_logic.entities.Company;
-import ru.yapridu.aptbooking.business_logic.models.CreateCompanyDTO;
+import ru.yapridu.aptbooking.business_logic.models.CreateOrUpdateCompanyDTO;
 import ru.yapridu.aptbooking.exceptions.SystemException;
 import ru.yapridu.aptbooking.repository.CompanyRepository;
 
@@ -16,17 +16,17 @@ public class CompanyService {
 
     private final CompanyRepository repository;
 
-    public Company create(CreateCompanyDTO companyData) {
+    public Company create(CreateOrUpdateCompanyDTO companyData) {
 
-        Company company = Company.builder()
+        Company newCompany = Company.builder()
             .ownerId(companyData.getOwnerId())
             .name(companyData.getName())
             .address(companyData.getAddress())
             .contact(companyData.getContact())
-            .officialDetails(companyData.getOfficialCompanyDetails())
+            .officialDetails(companyData.getOfficialDetails())
             .description(companyData.getDescription())
             .build();
-        return repository.save(company);
+        return repository.save(newCompany);
     }
 
     public List<Company> getAll() {
@@ -38,6 +38,20 @@ public class CompanyService {
 
         return repository.findById(id).orElseThrow(
             () -> new SystemException("Company with id " + id + " not found."));
+    }
+
+    public Company update(UUID id, CreateOrUpdateCompanyDTO companyData) {
+
+        Company companyToUpdate = repository.findById(id).orElseThrow(
+                () -> new SystemException("Company cannot be updated because company with id " + id + " not found."));
+        companyToUpdate.setOwnerId(companyData.getOwnerId());
+        companyToUpdate.setName(companyData.getName());
+        companyToUpdate.setAddress(companyData.getAddress());
+        companyToUpdate.setContact(companyData.getContact());
+        companyToUpdate.setOfficialDetails(companyData.getOfficialDetails());
+        companyToUpdate.setDescription(companyData.getDescription());
+
+        return repository.save(companyToUpdate);
     }
 
     public void deleteById(UUID id) {
