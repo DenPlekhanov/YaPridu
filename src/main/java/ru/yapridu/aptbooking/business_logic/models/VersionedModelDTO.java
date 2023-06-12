@@ -22,5 +22,4 @@ public class VersionedModelDTO extends ModelDTO {
             .version(entity.getVersion())
             .build();
     }
-
 }
