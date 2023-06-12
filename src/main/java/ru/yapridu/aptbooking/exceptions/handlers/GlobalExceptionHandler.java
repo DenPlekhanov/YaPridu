@@ -15,11 +15,11 @@ public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler
-    public ResponseEntity<ErrorMessageContainer> catchResourceNotFoundException(SystemException e) {
+    @ExceptionHandler(SystemException.class)
+    public ResponseEntity<ErrorMessageContainer> catchSystemException(SystemException e) {
 
         LOGGER.error(
-            "\nError id: {}\nError code: {}\nOperation code: {}\nError message: {}",
+            "\n\tError id: {}\n\tError code: {}\n\tOperation code: {}\n\tError message: {}",
             e.getId(), e.getErrorCode(), e.getOperationCode(), e.getMessage()
         );
 
