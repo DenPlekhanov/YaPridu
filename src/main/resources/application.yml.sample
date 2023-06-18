@@ -12,52 +12,23 @@ spring:
   flyway:
     locations: 'classpath:migrations'
 
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: 863222799154-f2hop90u5f4e8e3vkg2qettkn1v047kg.apps.googleusercontent.com
-##            client-secret: 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
-#            client-secret: ${googleClientSecret} #ClientCecret should be specified in Environment Variables (Edit Configurations -> Environment Variables -> add googleClientSecret and his secret value)
-#          vk:
-#            #           Это приложение создано тут https://vk.com/apps?act=manage
-#            client-id: 51528571
-##            client-secret: Huxc2GRiWpsfeMjaxeoU
-#            client-secret: ${vkClientSecret} #ClientCecret should be specified in Environment Variables (Edit Configurations -> Environment Variables -> add vkClientSecret and his secret value)
-#
-#            #            Это приложение создано тут https://platform.vk.com/ Это пока не работает (возможно взлетит при работе с конкретного домена, т.к. сейчас ошибки переадресации.
-#            #            client-id: 51528572
-#            #            client-secret: uVlQho4wMWwovVA044YJ
-#            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-#            #use post, as vk needs clientId and clientSecret as request params and does not accepts Basic auth
-#            client-authentication-method: post
-#            authorization-grant-type: authorization_code
-#            scope: email
-#        provider:
-#          vk:
-#            #revoke=1 needs to always show vk dialog
-#            authorization-uri: https://oauth.vk.com/authorize?revoke=1
-#            token-uri: https://oauth.vk.com/access_token
-#            user-info-uri: https://api.vk.com/method/users.get?v=8.1&fields=photo_max
-#            user-name-attribute: first_name
-#          google:
-#            user-name-attribute: name
-
   datasource:
     url:
+    driver-class-name: org.postgresql.Driver
     username:
     password:
 
-  #jpa:
-    #show-sql: true
-    #hibernate:
-      #ddl-auto: "update"
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: "validate" # create / update
 
 springdoc:
   swagger-ui:
     path: "/swagger-ui.html"
 
 #logging:
-#  level:
-#    root: debug
+#    level:
+#        root: INFO
+#        org.hibernate: DEBUG
+#        ru.yapridu.aptbooking: INFO
